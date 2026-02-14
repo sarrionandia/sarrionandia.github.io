@@ -1,0 +1,337 @@
+/* ========================================
+   CSS Custom Properties
+   ======================================== */
+
+:root {
+  --bg: #0a0e14;
+  --terminal-bg: #1a1e24;
+  --green: #33ff33;
+  --amber: #ffb000;
+  --cyan: #00d4ff;
+  --white: #e0e0e0;
+  --dim: #555;
+  --comment: #666;
+  --font-mono: 'JetBrains Mono', monospace;
+  --dot-red: #ff5f57;
+  --dot-yellow: #febc2e;
+  --dot-green: #28c840;
+}
+
+/* ========================================
+   Reset
+   ======================================== */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   Base
+   ======================================== */
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+/* ========================================
+   Terminal Window
+   ======================================== */
+
+.terminal {
+  background-color: var(--terminal-bg);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 760px;
+  box-shadow:
+    0 0 40px rgba(51, 255, 51, 0.07),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   Title Bar
+   ======================================== */
+
+.terminal-titlebar {
+  background: #2a2e34;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red { background-color: var(--dot-red); }
+.dot-yellow { background-color: var(--dot-yellow); }
+.dot-green { background-color: var(--dot-green); }
+
+.terminal-title {
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 44px; /* offset for dots */
+  font-size: 0.8rem;
+  color: var(--dim);
+}
+
+/* ========================================
+   Terminal Body
+   ======================================== */
+
+.terminal-body {
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   Command Lines & Output
+   ======================================== */
+
+.command-line {
+  margin-top: 1.5rem;
+  white-space: nowrap;
+}
+
+section:first-child .command-line {
+  margin-top: 0;
+}
+
+.prompt {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.output {
+  margin-top: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+/* ========================================
+   ASCII Art
+   ======================================== */
+
+.ascii-art {
+  color: var(--green);
+  font-size: 0.85rem;
+  line-height: 1.2;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.tagline {
+  margin-top: 0.75rem;
+  color: var(--white);
+}
+
+.tagline strong {
+  color: var(--green);
+}
+
+/* ========================================
+   Links (ls -la style)
+   ======================================== */
+
+.links-output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.link-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  white-space: nowrap;
+}
+
+.permissions {
+  color: var(--dim);
+  font-size: 0.8rem;
+}
+
+.link-entry a {
+  color: var(--cyan);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.link-entry a:hover {
+  text-decoration: underline;
+}
+
+.arrow {
+  color: var(--dim);
+}
+
+.link-target {
+  color: var(--dim);
+  font-size: 0.8rem;
+}
+
+/* ========================================
+   Experience Log
+   ======================================== */
+
+.experience-output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.log-comment {
+  color: var(--comment);
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.log-entry {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.log-date {
+  color: var(--dim);
+  font-size: 0.8rem;
+  min-width: 0;
+}
+
+.log-role {
+  color: var(--green);
+}
+
+.log-separator {
+  color: var(--dim);
+}
+
+.log-company {
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* ========================================
+   Blinking Cursor
+   ======================================== */
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background-color: var(--green);
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+
+.terminal-footer {
+  padding: 0.75rem 1.5rem;
+  border-top: 1px solid #2a2e34;
+  text-align: center;
+}
+
+.terminal-footer p {
+  color: var(--dim);
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+/* ========================================
+   CRT Scanlines Overlay
+   ======================================== */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 600px) {
+  body {
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .terminal {
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .terminal-body {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .ascii-art {
+    font-size: 0.65rem;
+  }
+
+  .link-entry {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .permissions {
+    display: none;
+  }
+
+  .log-entry {
+    flex-direction: column;
+    gap: 0.1rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--green);
+    margin-bottom: 0.5rem;
+  }
+
+  .log-separator {
+    display: none;
+  }
+
+  .log-entry .log-role::after {
+    content: " @";
+    color: var(--dim);
+  }
+}
